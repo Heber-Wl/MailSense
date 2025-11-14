@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='resultado.css') }}">
+    <title>Resultado da Classificação</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Resultado da Classificação</h1>
+
+        <div class="result-section">
+            <div class="category-box">
+                <div class="category-label">Categoria Identificada:</div>
+                <div class="category-value">{{ categoria }}</div>
+            </div>
+
+            <div class="suggestion-box">
+                <div class="suggestion-title">Sugestão Automática:</div>
+                <div class="suggestion-text">{{ sugestao }}</div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Conteúdo Processado:</h2>
+            <div class="content-box">{{ conteudo }}</div>
+        </div>
+
+        <button class="btn" onclick="window.history.back()">Voltar</button>
+    </div>
+</body>
+</html>
