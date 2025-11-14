@@ -1,14 +1,59 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
     <title>MailSense</title>
+    <title>Classificador de E-mail</title>
 </head>
 <body>
-    <h1>MailSense</h1>
-    <span>Plataforma inteligente para analise de e-mails</span>
+    <div class="container">
+        <h1>Classificador de E-mail</h1>
+        <p class="subtitle">
+            Faça upload de um arquivo PDF ou TXT, ou cole o conteúdo do e-mail abaixo para classificação
+        </p>
+
+        <form action="/processar-email" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label>Upload (PDF ou TXT):</label>
+                <div class="file-input-wrapper">
+                    <input type="file" name="arquivo" id="fileInput" accept=".pdf,.txt" onchange="updateFileName(this)">
+                    <label for="fileInput" class="file-input-label">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                        </svg>
+                        Escolher arquivo
+                    </label>
+                </div>
+                <div class="file-name" id="fileName">Nenhum arquivo escolhido</div>
+            </div>
+
+            <div class="divider">
+                <span>OU</span>
+            </div>
+
+            <div class="form-group">
+                <label>Cole o conteúdo do e-mail:</label>
+                <textarea name="conteudo" placeholder="Cole aqui o conteúdo do e-mail que deseja classificar..."
+                ></textarea>
+            </div>
+
+            <button type="submit" class="btn">Processar E-mail</button>
+        </form>
+    </div>
+
+    <script>
+        function updateFileName(input) {
+            const fileNameDisplay = document.getElementById('fileName');
+            if (input.files && input.files[0]) {
+                fileNameDisplay.textContent = input.files[0].name;
+            } else {
+                fileNameDisplay.textContent = 'Nenhum arquivo escolhido';
+            }
+        }
+    </script>
 </body>
 </html>
